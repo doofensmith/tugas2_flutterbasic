@@ -18,5 +18,5 @@ Widget yang terpakai sesuai pembelajaran :
 - Expanded
 
 Screenshot :
-
+![Screenshot Hasil](https://github.com/doofensmith/tugas2_flutterbasic/blob/master/assets/images/Screenshot.PNG?raw=true)
 
