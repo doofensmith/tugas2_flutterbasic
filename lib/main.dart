@@ -24,64 +24,124 @@ class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Chat"),
-        actions: [
-          IconButton(
-              onPressed: () {
-                //ketika timbol ditekan
-              },
-              icon: Icon(Icons.search, color: Colors.white)),
-          PopupMenuButton(
-            itemBuilder: (BuildContext context) {
-              return {
-                "New group",
-                "New broadcast",
-                "Linked devices",
-                "Starred messages",
-                "Settings"
-              }.map((String pilihan) {
-                return PopupMenuItem<String>(
-                  value: pilihan,
-                  child: Text(pilihan),
-                );
-              }).toList();
+      appBar: isiAppBar(),
+      floatingActionButton: isiFloatingActionButton(),
+      body: isiBody(),
+    );
+  }
+
+  FloatingActionButton isiFloatingActionButton() {
+    return FloatingActionButton(
+      onPressed: () {
+        //ketika tombol ditekan
+      },
+      tooltip: "Chat",
+      backgroundColor: Colors.green,
+      child: Icon(
+        Icons.chat,
+        color: Colors.white,
+      ),
+    );
+  }
+
+  AppBar isiAppBar() {
+    return AppBar(
+      title: Text("Chat"),
+      actions: [
+        IconButton(
+            onPressed: () {
+              //ketika timbol ditekan
             },
-          )
+            icon: Icon(Icons.search, color: Colors.white)),
+        PopupMenuButton(
+          itemBuilder: (BuildContext context) {
+            return {
+              "New group",
+              "New broadcast",
+              "Linked devices",
+              "Starred messages",
+              "Settings"
+            }.map((String pilihan) {
+              return PopupMenuItem<String>(
+                value: pilihan,
+                child: Text(pilihan),
+              );
+            }).toList();
+          },
+        )
+      ],
+    );
+  }
+
+  Container isiBody() {
+    return Container(
+      child: ListView(
+        children: [
+          chatItem(
+              NetworkImage(
+                  'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg'),
+              "Burung Hantu",
+              "sebuah pesan",
+              "12/10/11",
+              "2"),
+          chatItem(
+              NetworkImage(
+                  'https://www.10viacomcbs.com.au/wp-content/uploads/2020/09/spongebob-squarepants-400x400-1.jpg'),
+              "Spongebob",
+              "peringatan",
+              "Yesterday",
+              "4"),
+          chatItem(AssetImage("assets/images/naruto400x400.jpg"), "Naruto",
+              "ayo memasak krabby patty", "Today", "2"),
+          chatItem(
+              NetworkImage(
+                  'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg'),
+              "Burung Hantu",
+              "sebuah pesan",
+              "12/10/11",
+              "2"),
+          chatItem(
+              NetworkImage(
+                  'https://www.10viacomcbs.com.au/wp-content/uploads/2020/09/spongebob-squarepants-400x400-1.jpg'),
+              "Spongebob",
+              "peringatan",
+              "Yesterday",
+              "4"),
+          chatItem(AssetImage("assets/images/naruto400x400.jpg"), "Naruto",
+              "ayo memasak krabby patty", "Today", "2"),
+          chatItem(
+              NetworkImage(
+                  'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg'),
+              "Burung Hantu",
+              "sebuah pesan",
+              "12/10/11",
+              "2"),
+          chatItem(
+              NetworkImage(
+                  'https://www.10viacomcbs.com.au/wp-content/uploads/2020/09/spongebob-squarepants-400x400-1.jpg'),
+              "Spongebob",
+              "peringatan",
+              "Yesterday",
+              "4"),
+          chatItem(AssetImage("assets/images/naruto400x400.jpg"), "Naruto",
+              "ayo memasak krabby patty", "Today", "2"),
+          chatItem(
+              NetworkImage(
+                  'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg'),
+              "Burung Hantu",
+              "sebuah pesan",
+              "12/10/11",
+              "2"),
+          chatItem(
+              NetworkImage(
+                  'https://www.10viacomcbs.com.au/wp-content/uploads/2020/09/spongebob-squarepants-400x400-1.jpg'),
+              "Spongebob",
+              "peringatan",
+              "Yesterday",
+              "4"),
+          chatItem(AssetImage("assets/images/naruto400x400.jpg"), "Naruto",
+              "ayo memasak krabby patty", "Today", "2"),
         ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          //ketika tombol ditekan
-        },
-        tooltip: "Chat",
-        backgroundColor: Colors.green,
-        child: Icon(
-          Icons.chat,
-          color: Colors.white,
-        ),
-      ),
-      body: Container(
-        child: ListView(
-          children: [
-            chatItem(
-                NetworkImage(
-                    'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg'),
-                "Burung Hantu",
-                "sebuah pesan",
-                "12/10/11",
-                "2"),
-            chatItem(
-                NetworkImage(
-                    'https://www.10viacomcbs.com.au/wp-content/uploads/2020/09/spongebob-squarepants-400x400-1.jpg'),
-                "Spongebob",
-                "peringatan",
-                "Yesterday",
-                "4"),
-            chatItem(AssetImage("assets/images/naruto400x400.jpg"), "Naruto",
-                "ayo memasak krabby patty", "Today", "2"),
-          ],
-        ),
       ),
     );
   }
