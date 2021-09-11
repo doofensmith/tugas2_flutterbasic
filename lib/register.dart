@@ -17,6 +17,9 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+  //form key
+  final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,11 +58,49 @@ class _RegisterPageState extends State<RegisterPage> {
                     ],
                     color: Colors.white,
                   ),
+                  child: Form(
+                    child: Container(
+                      margin: EdgeInsets.all(20),
+                      child: Column(
+                        children: [
+                          textFormField(),
+                          textFormField(),
+                        ],
+                      ),
+                    ),
+                  ),
                 ),
               ),
             ],
           ),
         ],
+      ),
+    );
+  }
+
+  TextFormField textFormField() {
+    return TextFormField(
+      textAlign: TextAlign.start,
+      style: TextStyle(
+        fontSize: 14,
+      ),
+      maxLines: 1,
+      maxLength: 40,
+      keyboardType: TextInputType.name,
+      textCapitalization: TextCapitalization.words,
+      decoration: InputDecoration(
+        prefixIcon: Icon(
+          Icons.person,
+        ),
+        labelText: "Full Name",
+        hintText: "Enter your full name",
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(12),
+          ),
+        ),
+        isDense: true,
+        counterText: '',
       ),
     );
   }
