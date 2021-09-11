@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 // Pada halaman baru tersebut buatlah formulir apapun,
@@ -32,18 +34,27 @@ class _RegisterPageState extends State<RegisterPage> {
           Column(
             mainAxisSize: MainAxisSize.max,
             children: [
-              Text(
-                "Create Account",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w600,
-                  fontSize: 18,
+              Container(
+                margin: EdgeInsets.only(
+                  top: 20,
+                ),
+                child: Text(
+                  "Create Account",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 18,
+                  ),
                 ),
               ),
               Expanded(
                 flex: 1,
                 child: Container(
-                  margin: EdgeInsets.symmetric(horizontal: 8),
+                  margin: EdgeInsets.only(
+                    left: 8,
+                    right: 8,
+                    top: 20,
+                  ),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(20),
@@ -60,11 +71,34 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                   child: Form(
                     child: Container(
-                      margin: EdgeInsets.all(20),
+                      margin: EdgeInsets.only(
+                        top: 8,
+                        left: 20,
+                        right: 20,
+                      ),
                       child: Column(
                         children: [
-                          textFormField(),
-                          textFormField(),
+                          textFormField(
+                            "Full Name",
+                            "Enter your full name",
+                            1,
+                            40,
+                            TextInputType.name,
+                            false,
+                            TextCapitalization.words,
+                            Icons.person,
+                          ),
+                          textFormField(
+                            "Email",
+                            "Enter your email address",
+                            1,
+                            40,
+                            TextInputType.emailAddress,
+                            false,
+                            TextCapitalization.none,
+                            Icons.email,
+                          ),
+                          buttonCreate(),
                         ],
                       ),
                     ),
@@ -78,29 +112,65 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
-  TextFormField textFormField() {
-    return TextFormField(
-      textAlign: TextAlign.start,
-      style: TextStyle(
-        fontSize: 14,
+  Widget buttonCreate() {
+    return Container(
+      margin: EdgeInsets.only(
+        top: 12,
       ),
-      maxLines: 1,
-      maxLength: 40,
-      keyboardType: TextInputType.name,
-      textCapitalization: TextCapitalization.words,
-      decoration: InputDecoration(
-        prefixIcon: Icon(
-          Icons.person,
+      child: ElevatedButton(
+        onPressed: () {},
+        child: Text(
+          "Create",
         ),
-        labelText: "Full Name",
-        hintText: "Enter your full name",
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.all(
-            Radius.circular(12),
+        style: ElevatedButton.styleFrom(
+          minimumSize: Size(double.infinity, 48),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(12),
+            ),
           ),
         ),
-        isDense: true,
-        counterText: '',
+      ),
+    );
+  }
+
+  Widget textFormField(
+      String labelText,
+      String hintText,
+      int maxLines,
+      int maxLength,
+      TextInputType textInputType,
+      bool isPassword,
+      TextCapitalization textCapitalization,
+      IconData iconData) {
+    return Container(
+      margin: EdgeInsets.only(
+        top: 12,
+      ),
+      child: TextFormField(
+        textAlign: TextAlign.start,
+        style: TextStyle(
+          fontSize: 14,
+        ),
+        maxLines: maxLines,
+        maxLength: maxLength,
+        keyboardType: textInputType,
+        obscureText: isPassword,
+        textCapitalization: textCapitalization,
+        decoration: InputDecoration(
+          prefixIcon: Icon(
+            iconData,
+          ),
+          labelText: labelText,
+          hintText: hintText,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(12),
+            ),
+          ),
+          isDense: true,
+          counterText: '',
+        ),
       ),
     );
   }
