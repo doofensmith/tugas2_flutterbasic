@@ -22,6 +22,10 @@ class _RegisterPageState extends State<RegisterPage> {
   //form key
   final _formKey = GlobalKey<FormState>();
 
+  //controller text form field
+  TextEditingController controllerTextFieldFullName = TextEditingController();
+  TextEditingController controllerTextFieldEmail = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -79,6 +83,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       child: Column(
                         children: [
                           textFormField(
+                            controllerTextFieldFullName,
                             "Full Name",
                             "Enter your full name",
                             1,
@@ -89,6 +94,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             Icons.person,
                           ),
                           textFormField(
+                            controllerTextFieldEmail,
                             "Email",
                             "Enter your email address",
                             1,
@@ -117,13 +123,46 @@ class _RegisterPageState extends State<RegisterPage> {
       margin: EdgeInsets.only(
         top: 12,
       ),
+      width: double.infinity,
+      height: 44,
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: () {
+          showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  title: Text(
+                    "Data",
+                  ),
+                  content: SingleChildScrollView(
+                    child: ListBody(
+                      children: [
+                        Text(
+                          "Full Name : ${controllerTextFieldFullName.text}",
+                        ),
+                        Text(
+                          "Email : ${controllerTextFieldEmail.text}",
+                        ),
+                      ],
+                    ),
+                  ),
+                  actions: [
+                    TextButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: Text(
+                        "OK",
+                      ),
+                    ),
+                  ],
+                );
+              });
+        },
         child: Text(
           "Create",
         ),
         style: ElevatedButton.styleFrom(
-          minimumSize: Size(double.infinity, 48),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.all(
               Radius.circular(12),
@@ -135,6 +174,7 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   Widget textFormField(
+      TextEditingController controller,
       String labelText,
       String hintText,
       int maxLines,
@@ -148,6 +188,7 @@ class _RegisterPageState extends State<RegisterPage> {
         top: 12,
       ),
       child: TextFormField(
+        controller: controller,
         textAlign: TextAlign.start,
         style: TextStyle(
           fontSize: 14,
