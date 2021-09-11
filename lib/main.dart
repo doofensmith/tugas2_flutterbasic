@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+//import page register ke main
+import 'register.dart';
+
 void main() {
   runApp(Apps());
 }
@@ -13,7 +16,7 @@ class Apps extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
-      home: MainPage(),
+      home: RegisterPage(),
     );
   }
 }
