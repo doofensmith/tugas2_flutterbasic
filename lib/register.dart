@@ -25,6 +25,7 @@ class _RegisterPageState extends State<RegisterPage> {
   //controller text form field
   TextEditingController controllerTextFieldFullName = TextEditingController();
   TextEditingController controllerTextFieldEmail = TextEditingController();
+  TextEditingController controllerBirthDate = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -84,6 +85,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         children: [
                           textFormField(
                             controllerTextFieldFullName,
+                            true,
                             "Full Name",
                             "Enter your full name",
                             1,
@@ -95,6 +97,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           ),
                           textFormField(
                             controllerTextFieldEmail,
+                            true,
                             "Email",
                             "Enter your email address",
                             1,
@@ -103,6 +106,9 @@ class _RegisterPageState extends State<RegisterPage> {
                             false,
                             TextCapitalization.none,
                             Icons.email,
+                          ),
+                          birthDatePicker(
+                            controllerBirthDate,
                           ),
                           buttonCreate(),
                         ],
@@ -143,6 +149,9 @@ class _RegisterPageState extends State<RegisterPage> {
                         Text(
                           "Email : ${controllerTextFieldEmail.text}",
                         ),
+                        Text(
+                          "Birth Date : ${controllerBirthDate.text}",
+                        ),
                       ],
                     ),
                   ),
@@ -175,6 +184,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
   Widget textFormField(
       TextEditingController controller,
+      bool isEditable,
       String labelText,
       String hintText,
       int maxLines,
@@ -189,6 +199,7 @@ class _RegisterPageState extends State<RegisterPage> {
       ),
       child: TextFormField(
         controller: controller,
+        enabled: isEditable,
         textAlign: TextAlign.start,
         style: TextStyle(
           fontSize: 14,
@@ -212,6 +223,53 @@ class _RegisterPageState extends State<RegisterPage> {
           isDense: true,
           counterText: '',
         ),
+      ),
+    );
+  }
+
+  Widget birthDatePicker(
+    TextEditingController controller,
+  ) {
+    return Container(
+      margin: EdgeInsets.only(
+        top: 12,
+      ),
+      child: TextFormField(
+        controller: controller,
+        readOnly: true,
+        textAlign: TextAlign.start,
+        style: TextStyle(
+          fontSize: 14,
+        ),
+        maxLines: 1,
+        maxLength: 15,
+        decoration: InputDecoration(
+          prefixIcon: Icon(
+            Icons.event,
+          ),
+          labelText: "Date of Birth",
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(12),
+            ),
+          ),
+          isDense: true,
+          counterText: '',
+        ),
+        onTap: () async {
+          DateTime? birthDate = await showDatePicker(
+              context: context,
+              initialDate: DateTime.now(),
+              firstDate: DateTime(1950),
+              lastDate: DateTime.now());
+
+          if (birthDate != null) {
+            setState(() {
+              controller.text =
+                  "${birthDate.day}/${birthDate.month}/${birthDate.year}";
+            });
+          }
+        },
       ),
     );
   }
