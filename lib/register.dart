@@ -26,6 +26,15 @@ class _RegisterPageState extends State<RegisterPage> {
   TextEditingController controllerTextFieldFullName = TextEditingController();
   TextEditingController controllerTextFieldEmail = TextEditingController();
   TextEditingController controllerBirthDate = TextEditingController();
+  TextEditingController controllerTextFieldPassword = TextEditingController();
+  TextEditingController controllerTextFieldConfirmPassword =
+      TextEditingController();
+
+  //status checkbox
+  bool isChecked = false;
+
+  //radio gender
+  String? gender = "Man";
 
   @override
   Widget build(BuildContext context) {
@@ -85,7 +94,6 @@ class _RegisterPageState extends State<RegisterPage> {
                         children: [
                           textFormField(
                             controllerTextFieldFullName,
-                            true,
                             "Full Name",
                             "Enter your full name",
                             1,
@@ -97,7 +105,6 @@ class _RegisterPageState extends State<RegisterPage> {
                           ),
                           textFormField(
                             controllerTextFieldEmail,
-                            true,
                             "Email",
                             "Enter your email address",
                             1,
@@ -107,9 +114,31 @@ class _RegisterPageState extends State<RegisterPage> {
                             TextCapitalization.none,
                             Icons.email,
                           ),
+                          textFormField(
+                              controllerTextFieldPassword,
+                              "Password",
+                              "Enter new password",
+                              1,
+                              20,
+                              TextInputType.text,
+                              true,
+                              TextCapitalization.none,
+                              Icons.lock),
+                          textFormField(
+                              controllerTextFieldConfirmPassword,
+                              "Confirm Password",
+                              "Confirm your password",
+                              1,
+                              20,
+                              TextInputType.text,
+                              true,
+                              TextCapitalization.none,
+                              Icons.lock),
                           birthDatePicker(
                             controllerBirthDate,
                           ),
+                          radioGender(),
+                          checkboxTermOfService(),
                           buttonCreate(),
                         ],
                       ),
@@ -118,6 +147,89 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
               ),
             ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget radioGender() {
+    return Container(
+      margin: EdgeInsets.only(
+        top: 12,
+      ),
+      child: Row(
+        children: [
+          Text(
+            "Gender : ",
+            style: TextStyle(
+              fontSize: 14,
+            ),
+          ),
+          Radio(
+            value: "Man",
+            groupValue: gender,
+            onChanged: (value) {
+              setState(() {
+                gender = value.toString();
+              });
+            },
+          ),
+          Text(
+            "Man",
+            style: TextStyle(
+              fontSize: 14,
+            ),
+          ),
+          Radio(
+            value: "Woman",
+            groupValue: gender,
+            onChanged: (value) {
+              setState(() {
+                gender = value.toString();
+              });
+            },
+          ),
+          Text(
+            "Woman",
+            style: TextStyle(
+              fontSize: 14,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget checkboxTermOfService() {
+    return Container(
+      margin: EdgeInsets.only(
+        top: 12,
+      ),
+      child: Row(
+        children: [
+          Checkbox(
+            value: isChecked,
+            onChanged: (value) {
+              setState(() {
+                isChecked = value!;
+              });
+            },
+          ),
+          Text(
+            "I agree with",
+            style: TextStyle(
+              fontSize: 14,
+            ),
+          ),
+          TextButton(
+            onPressed: () {},
+            child: Text(
+              "Terms of Services",
+              style: TextStyle(
+                fontSize: 14,
+              ),
+            ),
           ),
         ],
       ),
@@ -184,7 +296,6 @@ class _RegisterPageState extends State<RegisterPage> {
 
   Widget textFormField(
       TextEditingController controller,
-      bool isEditable,
       String labelText,
       String hintText,
       int maxLines,
@@ -199,7 +310,6 @@ class _RegisterPageState extends State<RegisterPage> {
       ),
       child: TextFormField(
         controller: controller,
-        enabled: isEditable,
         textAlign: TextAlign.start,
         style: TextStyle(
           fontSize: 14,
