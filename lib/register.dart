@@ -27,11 +27,9 @@ class _RegisterPageState extends State<RegisterPage> {
   TextEditingController controllerTextFieldEmail = TextEditingController();
   TextEditingController controllerBirthDate = TextEditingController();
   TextEditingController controllerTextFieldPassword = TextEditingController();
-  TextEditingController controllerTextFieldConfirmPassword =
-      TextEditingController();
 
   //status checkbox
-  bool isChecked = false;
+  bool isChecked = true;
 
   //radio gender
   String? gender = "Man";
@@ -84,6 +82,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     color: Colors.white,
                   ),
                   child: Form(
+                    key: _formKey,
                     child: Container(
                       margin: EdgeInsets.only(
                         top: 8,
@@ -118,16 +117,6 @@ class _RegisterPageState extends State<RegisterPage> {
                               controllerTextFieldPassword,
                               "Password",
                               "Enter new password",
-                              1,
-                              20,
-                              TextInputType.text,
-                              true,
-                              TextCapitalization.none,
-                              Icons.lock),
-                          textFormField(
-                              controllerTextFieldConfirmPassword,
-                              "Confirm Password",
-                              "Confirm your password",
                               1,
                               20,
                               TextInputType.text,
@@ -239,13 +228,14 @@ class _RegisterPageState extends State<RegisterPage> {
   Widget buttonCreate() {
     return Container(
       margin: EdgeInsets.only(
-        top: 12,
+        top: 40,
       ),
       width: double.infinity,
       height: 44,
       child: ElevatedButton(
         onPressed: () {
-          showDialog(
+          if (_formKey.currentState!.validate()) {
+            showDialog(
               context: context,
               builder: (BuildContext context) {
                 return AlertDialog(
@@ -262,7 +252,13 @@ class _RegisterPageState extends State<RegisterPage> {
                           "Email : ${controllerTextFieldEmail.text}",
                         ),
                         Text(
+                          "Password : ${controllerTextFieldPassword.text}",
+                        ),
+                        Text(
                           "Birth Date : ${controllerBirthDate.text}",
+                        ),
+                        Text(
+                          "Gender : $gender",
                         ),
                       ],
                     ),
@@ -278,7 +274,9 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                   ],
                 );
-              });
+              },
+            );
+          }
         },
         child: Text(
           "Create",
@@ -310,6 +308,13 @@ class _RegisterPageState extends State<RegisterPage> {
       ),
       child: TextFormField(
         controller: controller,
+        validator: (value) {
+          if (value!.isEmpty) {
+            return "This field can't be empty";
+          } else {
+            return null;
+          }
+        },
         textAlign: TextAlign.start,
         style: TextStyle(
           fontSize: 14,
@@ -346,6 +351,13 @@ class _RegisterPageState extends State<RegisterPage> {
       ),
       child: TextFormField(
         controller: controller,
+        validator: (value) {
+          if (value!.isEmpty) {
+            return "Please select your birth date";
+          } else {
+            return null;
+          }
+        },
         readOnly: true,
         textAlign: TextAlign.start,
         style: TextStyle(
