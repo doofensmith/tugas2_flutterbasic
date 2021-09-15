@@ -1,23 +1,28 @@
-## Tugas 2 Flutter Basic
+## Tugas 3 Flutter - User Input and Forms
 
 **Wahyu Wijanarko**
 
-Tampilan 1 layout aplikasi chat, referensi :
-> WhatsApp
-
 Widget yang terpakai sesuai pembelajaran :
-- AppBar
-- Text
-- Column
-- Row
-- Container
-- Image
-- FloatingActionButton
-- IconButton
-- ListView
-- Expanded
+- TextFormField
+- Checkbox
+- Radio
+- DatePicker
 
-Screenshot :
+**Screenshot :**
 
-![Screenshot Hasil](https://github.com/doofensmith/tugas2_flutterbasic/blob/master/assets/images/Screenshot.PNG?raw=true)
+**Screenshot awal**
+
+![Screenshot Awal](https://github.com/doofensmith/tugas2_flutterbasic/blob/master/assets/images/ss1.PNG?raw=true)
+
+**Screenshot validator**
+
+![Screenshot Awal](https://github.com/doofensmith/tugas2_flutterbasic/blob/master/assets/images/ss2.PNG?raw=true)
+
+**Screenshot dialog**
+
+![Screenshot Awal](https://github.com/doofensmith/tugas2_flutterbasic/blob/master/assets/images/ss3.PNG?raw=true)
+
+**Screenshot datepicker**
+
+![Screenshot Awal](https://github.com/doofensmith/tugas2_flutterbasic/blob/master/assets/images/ss4.PNG?raw=true)
 
