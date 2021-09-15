@@ -37,107 +37,109 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-          Container(
-            color: Colors.green,
-            height: MediaQuery.of(context).size.height / 2,
-          ),
-          Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Container(
-                margin: EdgeInsets.only(
-                  top: 20,
-                ),
-                child: Text(
-                  "Create Account",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w600,
-                    fontSize: 18,
-                  ),
-                ),
-              ),
-              Expanded(
-                flex: 1,
-                child: Container(
+      body: SafeArea(
+        child: Stack(
+          children: [
+            Container(
+              color: Colors.green,
+              height: MediaQuery.of(context).size.height / 2,
+            ),
+            Column(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Container(
                   margin: EdgeInsets.only(
-                    left: 8,
-                    right: 8,
                     top: 20,
                   ),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(20),
-                      topRight: Radius.circular(20),
+                  child: Text(
+                    "Create Account",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 18,
                     ),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey,
-                        blurRadius: 8,
-                        offset: Offset(0.0, 0.0),
-                      ),
-                    ],
-                    color: Colors.white,
                   ),
-                  child: Form(
-                    key: _formKey,
-                    child: Container(
-                      margin: EdgeInsets.only(
-                        top: 8,
-                        left: 20,
-                        right: 20,
+                ),
+                Expanded(
+                  flex: 1,
+                  child: Container(
+                    margin: EdgeInsets.only(
+                      left: 8,
+                      right: 8,
+                      top: 20,
+                    ),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(20),
+                        topRight: Radius.circular(20),
                       ),
-                      child: Column(
-                        children: [
-                          textFormField(
-                            controllerTextFieldFullName,
-                            "Full Name",
-                            "Enter your full name",
-                            1,
-                            40,
-                            TextInputType.name,
-                            false,
-                            TextCapitalization.words,
-                            Icons.person,
-                          ),
-                          textFormField(
-                            controllerTextFieldEmail,
-                            "Email",
-                            "Enter your email address",
-                            1,
-                            40,
-                            TextInputType.emailAddress,
-                            false,
-                            TextCapitalization.none,
-                            Icons.email,
-                          ),
-                          textFormField(
-                              controllerTextFieldPassword,
-                              "Password",
-                              "Enter new password",
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey,
+                          blurRadius: 8,
+                          offset: Offset(0.0, 0.0),
+                        ),
+                      ],
+                      color: Colors.white,
+                    ),
+                    child: Form(
+                      key: _formKey,
+                      child: Container(
+                        margin: EdgeInsets.only(
+                          top: 8,
+                          left: 20,
+                          right: 20,
+                        ),
+                        child: Column(
+                          children: [
+                            textFormField(
+                              controllerTextFieldFullName,
+                              "Full Name",
+                              "Enter your full name",
                               1,
-                              20,
-                              TextInputType.text,
-                              true,
+                              40,
+                              TextInputType.name,
+                              false,
+                              TextCapitalization.words,
+                              Icons.person,
+                            ),
+                            textFormField(
+                              controllerTextFieldEmail,
+                              "Email",
+                              "Enter your email address",
+                              1,
+                              40,
+                              TextInputType.emailAddress,
+                              false,
                               TextCapitalization.none,
-                              Icons.lock),
-                          birthDatePicker(
-                            controllerBirthDate,
-                          ),
-                          radioGender(),
-                          checkboxTermOfService(),
-                          buttonCreate(),
-                        ],
+                              Icons.email,
+                            ),
+                            textFormField(
+                                controllerTextFieldPassword,
+                                "Password",
+                                "Enter new password",
+                                1,
+                                20,
+                                TextInputType.text,
+                                true,
+                                TextCapitalization.none,
+                                Icons.lock),
+                            birthDatePicker(
+                              controllerBirthDate,
+                            ),
+                            radioGender(),
+                            checkboxTermOfService(),
+                            buttonCreate(),
+                          ],
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-            ],
-          ),
-        ],
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -159,9 +161,11 @@ class _RegisterPageState extends State<RegisterPage> {
             value: "Man",
             groupValue: gender,
             onChanged: (value) {
-              setState(() {
-                gender = value.toString();
-              });
+              setState(
+                () {
+                  gender = value.toString();
+                },
+              );
             },
           ),
           Text(
@@ -174,9 +178,11 @@ class _RegisterPageState extends State<RegisterPage> {
             value: "Woman",
             groupValue: gender,
             onChanged: (value) {
-              setState(() {
-                gender = value.toString();
-              });
+              setState(
+                () {
+                  gender = value.toString();
+                },
+              );
             },
           ),
           Text(
@@ -200,9 +206,11 @@ class _RegisterPageState extends State<RegisterPage> {
           Checkbox(
             value: isChecked,
             onChanged: (value) {
-              setState(() {
-                isChecked = value!;
-              });
+              setState(
+                () {
+                  isChecked = value!;
+                },
+              );
             },
           ),
           Text(
@@ -235,47 +243,63 @@ class _RegisterPageState extends State<RegisterPage> {
       child: ElevatedButton(
         onPressed: () {
           if (_formKey.currentState!.validate()) {
-            showDialog(
-              context: context,
-              builder: (BuildContext context) {
-                return AlertDialog(
-                  title: Text(
-                    "Data",
-                  ),
-                  content: SingleChildScrollView(
-                    child: ListBody(
-                      children: [
-                        Text(
-                          "Full Name : ${controllerTextFieldFullName.text}",
-                        ),
-                        Text(
-                          "Email : ${controllerTextFieldEmail.text}",
-                        ),
-                        Text(
-                          "Password : ${controllerTextFieldPassword.text}",
-                        ),
-                        Text(
-                          "Birth Date : ${controllerBirthDate.text}",
-                        ),
-                        Text(
-                          "Gender : $gender",
-                        ),
-                      ],
+            if (isChecked) {
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: Text(
+                      "Data",
                     ),
-                  ),
-                  actions: [
-                    TextButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      child: Text(
-                        "OK",
+                    content: SingleChildScrollView(
+                      child: ListBody(
+                        children: [
+                          Text(
+                            "Full Name : ${controllerTextFieldFullName.text}",
+                          ),
+                          Text(
+                            "Email : ${controllerTextFieldEmail.text}",
+                          ),
+                          Text(
+                            "Password : ${controllerTextFieldPassword.text}",
+                          ),
+                          Text(
+                            "Birth Date : ${controllerBirthDate.text}",
+                          ),
+                          Text(
+                            "Gender : $gender",
+                          ),
+                        ],
                       ),
                     ),
-                  ],
-                );
-              },
-            );
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: Text(
+                          "OK",
+                        ),
+                      ),
+                    ],
+                  );
+                },
+              );
+            } else {
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: Text(
+                      "Information",
+                    ),
+                    content: Text(
+                      "Please accept our Terms of Services.",
+                    ),
+                  );
+                },
+              );
+            }
           }
         },
         child: Text(
@@ -386,10 +410,12 @@ class _RegisterPageState extends State<RegisterPage> {
               lastDate: DateTime.now());
 
           if (birthDate != null) {
-            setState(() {
-              controller.text =
-                  "${birthDate.day}/${birthDate.month}/${birthDate.year}";
-            });
+            setState(
+              () {
+                controller.text =
+                    "${birthDate.day}/${birthDate.month}/${birthDate.year}";
+              },
+            );
           }
         },
       ),
