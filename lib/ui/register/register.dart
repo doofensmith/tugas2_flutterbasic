@@ -19,8 +19,8 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-  //form key
-  final _formKey = GlobalKey<FormState>();
+  //form key (harus dikasih tipe data
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   //controller text form field
   TextEditingController controllerTextFieldFullName = TextEditingController();
@@ -90,47 +90,49 @@ class _RegisterPageState extends State<RegisterPage> {
                           left: 20,
                           right: 20,
                         ),
-                        child: Column(
-                          children: [
-                            textFormField(
-                              controllerTextFieldFullName,
-                              "Full Name",
-                              "Enter your full name",
-                              1,
-                              40,
-                              TextInputType.name,
-                              false,
-                              TextCapitalization.words,
-                              Icons.person,
-                            ),
-                            textFormField(
-                              controllerTextFieldEmail,
-                              "Email",
-                              "Enter your email address",
-                              1,
-                              40,
-                              TextInputType.emailAddress,
-                              false,
-                              TextCapitalization.none,
-                              Icons.email,
-                            ),
-                            textFormField(
-                                controllerTextFieldPassword,
-                                "Password",
-                                "Enter new password",
+                        child: SingleChildScrollView(
+                          child: Column(
+                            children: [
+                              textFormField(
+                                controllerTextFieldFullName,
+                                "Full Name",
+                                "Enter your full name",
                                 1,
-                                20,
-                                TextInputType.text,
-                                true,
+                                40,
+                                TextInputType.name,
+                                false,
+                                TextCapitalization.words,
+                                Icons.person,
+                              ),
+                              textFormField(
+                                controllerTextFieldEmail,
+                                "Email",
+                                "Enter your email address",
+                                1,
+                                40,
+                                TextInputType.emailAddress,
+                                false,
                                 TextCapitalization.none,
-                                Icons.lock),
-                            birthDatePicker(
-                              controllerBirthDate,
-                            ),
-                            radioGender(),
-                            checkboxTermOfService(),
-                            buttonCreate(),
-                          ],
+                                Icons.email,
+                              ),
+                              textFormField(
+                                  controllerTextFieldPassword,
+                                  "Password",
+                                  "Enter new password",
+                                  1,
+                                  20,
+                                  TextInputType.text,
+                                  true,
+                                  TextCapitalization.none,
+                                  Icons.lock),
+                              birthDatePicker(
+                                controllerBirthDate,
+                              ),
+                              radioGender(),
+                              checkboxTermOfService(),
+                              buttonCreate(),
+                            ],
+                          ),
                         ),
                       ),
                     ),
